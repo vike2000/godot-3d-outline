@@ -31,9 +31,9 @@ func post_process() -> void:
 	camera.fov = main_camera.fov
 	camera.near = main_camera.near
 	camera.far = main_camera.far
-	camera.transform = main_camera.global_transform
+	camera.global_transform = main_camera.global_transform
 	for n in nodes:
-		n.transform = nodes[n].global_transform
+		n.global_transform = nodes[n].global_transform
 
 
 func remove_node(node: MeshInstance3D) -> void:
