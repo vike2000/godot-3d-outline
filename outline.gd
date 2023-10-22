@@ -11,14 +11,16 @@ extends SubViewportContainer
 var nodes := {}
 
 
-func outline_node(node: MeshInstance3D) -> void:
+func outline_node(node: MeshInstance3D) -> MeshInstance3D:
 	var n := MeshInstance3D.new()
 	n.mesh = node.mesh
 	n.material_override = outline_material
+	if node.is_connected("tree_exited", Callable(self, "remove_node")): node.disconnect("tree_exited", Callable(self, "remove_node"))
 	var e := node.connect("tree_exited", Callable(self, "remove_node").bind(n))
 	assert(e == OK)
 	root.add_child(n)
 	nodes[n] = node
+	return n
 
 
 func _process(_delta: float) -> void:
