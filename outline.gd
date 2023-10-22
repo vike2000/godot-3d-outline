@@ -1,21 +1,21 @@
-extends ViewportContainer
+extends SubViewportContainer
 
 
-export var outline_material: Material
-export var main_camera_path := NodePath()
+@export var outline_material: Material
+@export var main_camera_path := NodePath()
 
-onready var root: Viewport = get_node("Viewport")
-onready var main_camera: Camera = get_node(main_camera_path)
-onready var camera: Camera = get_node("Viewport/Camera")
+@onready var root: SubViewport = get_node("SubViewport")
+@onready var main_camera: Camera3D = get_node(main_camera_path)
+@onready var camera: Camera3D = get_node("SubViewport/Camera3D")
 
 var nodes := {}
 
 
-func outline_node(node: MeshInstance) -> void:
-	var n := MeshInstance.new()
+func outline_node(node: MeshInstance3D) -> void:
+	var n := MeshInstance3D.new()
 	n.mesh = node.mesh
 	n.material_override = outline_material
-	var e := node.connect("tree_exited", self, "remove_node", [n])
+	var e := node.connect("tree_exited", Callable(self, "remove_node").bind(n))
 	assert(e == OK)
 	root.add_child(n)
 	nodes[n] = node
@@ -34,6 +34,6 @@ func post_process() -> void:
 		n.transform = nodes[n].global_transform
 
 
-func remove_node(node: MeshInstance) -> void:
+func remove_node(node: MeshInstance3D) -> void:
 	node.queue_free()
 	nodes.erase(node)

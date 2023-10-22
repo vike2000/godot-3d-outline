@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform float size = 10.0;
-uniform vec4 outline_color: hint_color = vec4(1.0, 0.0, 0.0, 1.0);
+uniform vec4 outline_color: source_color = vec4(1.0, 0.0, 0.0, 1.0);
 
 
 vec4 custom_lod(sampler2D tex, vec2 pixel_size, vec2 uv) {

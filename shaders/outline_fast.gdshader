@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform float size = 10.0;
-uniform vec4 outline_color: hint_color = vec4(1.0, 0.0, 0.0, 1.0);
+uniform vec4 outline_color: source_color = vec4(1.0, 0.0, 0.0, 1.0);
 
 void fragment() {
 	bool do_discard = true;

@@ -1,11 +1,11 @@
-extends Camera
+extends Camera3D
 
 
 var pan := 0.0
 var tilt := 0.0
 
-export var angular_speed := 0.1
-export var linear_speed := 3.0
+@export var angular_speed := 0.1
+@export var linear_speed := 3.0
 
 
 func _input(event: InputEvent) -> void:
